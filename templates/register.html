@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h1>Register</h1>
+    <form method="post" action="" class="form-group">
+        <label for="username">Username</label>
+        <input name="username" id="username" type="text" class="form-control" maxlength="255">
+        <label for="username">Password</label>
+        <input name="password" id="password" type="password" class="form-control" minlength="10">
+        <button type="submit" class="btn btn-primary" style="margin-top:5%;">Register</button>
+    </form>
+    <small class="text-muted">
+        Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Sign in</a>
+    </small>
+{% endblock %}
