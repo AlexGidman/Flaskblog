@@ -3,5 +3,14 @@
 
 {% block content %}
 <h1>Login Page</h1> 
-This is the login page
+    <form method="post" action="" class="form-group">
+        <label for="username">Username</label>
+        <input name="username" id="username" type="text" class="form-control" maxlength="255">
+        <label for="username">Password</label>
+        <input name="password" id="password" type="password" class="form-control" minlength="10">
+        <button type="submit" class="btn btn-primary" style="margin-top:5%;">Login</button>
+    </form>
+    <small class="text-muted">
+        Need to Register? <a class="ml-2" href="{{ url_for('register') }}">Register</a>
+    </small>
 {% endblock %}
