@@ -2,12 +2,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Home Page</h1> 
-This is the homepage
+<h1>Home Page</h1><br>
 {% for post in posts %}
-    <h2>{{ post.title }}</h2>
-    <p><i>By {{ post.author }}</i> on {{ post.date_posted }}</p>
-    <p>{{ post.content }}</p>
+    <h2>{{ post[2] }}</h2>
+    <p><i>Posted on {{ post[4] }}</i><br>
+    {{ post[3] }}</p><br>
 {% endfor %}
 
 {% endblock %}

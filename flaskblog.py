@@ -2,9 +2,10 @@ from flask import Flask, render_template, url_for, redirect, flash, request, ses
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash 
 from functools import wraps
+from contextmanager import SQL
 import sqlite3
 
-# DECORATORS 
+# LOGIN DECORATOR
 def login_required(f):
     """
     Decorate routes to require login.
@@ -22,8 +23,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev'
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-conn = sqlite3.connect("site.db", check_same_thread=False,)
-db = conn.cursor()
+#conn = sqlite3.connect("site.db", check_same_thread=False,)
+#db = conn.cursor()
 
 # ROUTES
 
@@ -32,7 +33,10 @@ db = conn.cursor()
 @app.route("/home")
 @login_required
 def home():
-    return render_template("index.html")
+    with SQL("SELECT * from posts") as rows:
+        for row in rows:
+            print(row)
+        return render_template("index.html", posts=rows)
 
 ## ABOUT
 @app.route("/about")
