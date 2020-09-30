@@ -1,30 +1,21 @@
 from flask import Flask, render_template, url_for, redirect, flash, request, session
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash 
-from functools import wraps
-from contextmanager import SQL
+from contextmanagers import SQL
+from profile import profile
+from decorators import login_required
 import sqlite3
 
-# LOGIN DECORATOR
-def login_required(f):
-    """
-    Decorate routes to require login.
-    http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
-    """
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get("id") is None:
-            return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated_function
-
- # CONFIG
+# CONFIG
 app = Flask(__name__)
+app.register_blueprint(profile, url_prefix="/profile")
+### Secret Key
 app.config['SECRET_KEY'] = 'dev'
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-#conn = sqlite3.connect("site.db", check_same_thread=False,)
-#db = conn.cursor()
+### SQLite3 
+conn = sqlite3.connect("site.db", check_same_thread=False,)
+db = conn.cursor()
 
 # ROUTES
 
@@ -34,8 +25,6 @@ app.config["SESSION_TYPE"] = "filesystem"
 @login_required
 def home():
     with SQL("SELECT * from posts") as rows:
-        for row in rows:
-            print(row)
         return render_template("index.html", posts=rows)
 
 ## ABOUT

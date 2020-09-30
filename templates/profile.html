@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Profile</h1><br>
+    <h2>Name: {{ user_profile[2] }} {{ user_profile[3] }}</h2>
+    <h2>Profession: {{ user_profile[4] }}</h2>
+    <h2>Interests: {{ user_profile[5] }}</h2>
+    <br><br>
+    <form method="post" action="" class="form-group">
+        <input type="hidden" name="id" value="{{ session.id }}">
+        <button type="submit" class="btn btn-primary" name="button" value="edit">Edit Profile</button>
+        <button type="submit" class="btn btn-info" name="button" value="deleteposts">Delete Posts</button>
+        <button type="submit" class="btn btn-danger" name="button" value="deleteprofile">Delete Profile</button>
+    </form>
+
+{% endblock %}

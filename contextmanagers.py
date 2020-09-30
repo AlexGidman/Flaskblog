@@ -11,6 +11,9 @@ def SQL(query):
     conn.commit()
     conn.close()
 
+""" 
+# TEST
 with SQL("SELECT * from user") as rows:
     for row in rows:
         print(row[1])
+"""
