@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h1>Profile - Edit</h1><br>
+    <form method="post" action="" class="form-group">
+        <h2>Name: <input type="text" name="first" value="{{ user_profile[2] }}"> <input type="text" name="last" value="{{ user_profile[3] }}"></h2>
+        <h2>Profession: <input type="text" name="profession" value="{{ user_profile[4] }}"></h2>
+        <h2>Interests: <input type="text" name="interests" value="{{ user_profile[5] }}"></h2>
+        <h2>Location: </h2>
+            <select name="location">
+                    {% for location in locations %}
+                    <option value="{{location}}" {{ 'selected' if location == user_profile[6] else '' }}>{{ location }}</option>
+                    {% endfor %}
+            </select>
+       
+        <br><br>
+        <input type="hidden" name="id" value="{{ session.id }}">
+        <button type="submit" class="btn btn-primary" name="button" value="save">Save Profile</button>
+    </form>
+
+{% endblock %}
